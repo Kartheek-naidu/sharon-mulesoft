@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3e2da138-3fe3-44c6-b7e4-295fa6c85d99" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="azure-cloud-deploymentsFlow" doc:id="8869f46d-5468-49ee-9652-b0cc482fc8f9" >
+		<http:listener doc:name="Listener" doc:id="38a45d82-2782-42f5-aed1-c95d8c188d5f" config-ref="HTTP_Listener_config" path="/deployments"/>
+		<ee:transform doc:name="Transform Message" doc:id="2b336dec-a4ed-41ee-8546-d1dcc54a39eb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"Hello, This is test message"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="60176304-c03e-4d59-a51d-b0703a3c2e45" message="Success response ::::: #[payload]"/>
+	</flow>
+</mule>
