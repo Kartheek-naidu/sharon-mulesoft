@@ -35,14 +35,22 @@
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${app.runtime}</muleVersion>
-						<username>${username}</username>
-						<password>${password}</password>
-						<applicationName>${cloudhub.application.name}</applicationName>
-						<environment>${environment}</environment>
-						<region>${region}</region>
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<businessGroup>${businessGroup}</businessGroup>
 						<workers>${workers}</workers>
 						<workerType>${workerType}</workerType>
-						<objectStoreV2>true</objectStoreV2>
+						<region>us-west-1</region>
+						<environment>${environment}</environment>
+						<applicationName>${applicationName}</applicationName>
+						<properties>
+							<mule.env>${mule.env}</mule.env>
+							<encrypt.key>${encrypt.key}</encrypt.key>
+							<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
+							<api.id>${ilg.api.version}</api.id>
+							<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
+						</properties>
 					</cloudHubDeployment>
 					<executions>
 						<execution>
@@ -92,6 +100,11 @@
 			<name>Anypoint Exchange</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
 			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>mule</id>
+			<name>Mule Repository</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
 		</repository>
 		<repository>
 			<id>mulesoft-releases</id>
