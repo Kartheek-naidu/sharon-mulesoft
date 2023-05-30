@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>test-cloud-deployments</artifactId>
+	<artifactId>test-cloud-deployments-one</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>test-cloud-deployments</name>
+	<name>test-cloud-deployments-one</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,8 +45,8 @@
 				<cloudHubDeployment>
 					<uri>${anypoint.url}</uri>
 					<muleVersion>${app.runtime}</muleVersion>
-					<username>sha_mule1212</username>
-					<password>Integration@123</password>
+					<username>ramana007</username>
+					<password>Anypoint@007</password>
 					<applicationName>${app.name}</applicationName>
 					<environment>${environment}</environment>
 					<region>${region}</region>
