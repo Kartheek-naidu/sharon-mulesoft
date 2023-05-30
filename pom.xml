@@ -5,22 +5,32 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>azure-cloud-deployments</artifactId>
+	<artifactId>test-cloud-deployments</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>azure-cloud-deployments</name>
+	<name>test-cloud-deployments</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.4.0-20230123</app.runtime>
+		<app.runtime>4.4.0</app.runtime>
 		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
 	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -31,50 +41,29 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-				<configuration>
-					<cloudHubDeployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>${app.runtime}</muleVersion>
-						<username>${anypoint.username}</username>
-						<password>${anypoint.password}</password>
-						<businessGroup>${businessGroup}</businessGroup>
-						<workers>${workers}</workers>
-						<workerType>${workerType}</workerType>
-						<region>us-west-1</region>
-						<environment>${environment}</environment>
-						<applicationName>${applicationName}</applicationName>
-						<properties>
-							<mule.env>${mule.env}</mule.env>
-							<encrypt.key>${encrypt.key}</encrypt.key>
-							<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
-							<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
-							<api.id>${ilg.api.version}</api.id>
-							<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
-						</properties>
-					</cloudHubDeployment>
-					<executions>
-						<execution>
-							<id>deploy</id>
-							<goals>
-								<goal>deploy</goal>
-							</goals>
-							<configuration>
-								<classifier>mule-application</classifier>
-							</configuration>
-						</execution>
-					</executions>
-					<classifier>mule-application</classifier>
+			<configuration>
+				<cloudHubDeployment>
+					<uri>${anypoint.url}</uri>
+					<muleVersion>${app.runtime}</muleVersion>
+					<username>sha_mule1212</username>
+					<password>Integration@123</password>
+					<applicationName>${app.name}</applicationName>
+					<environment>${environment}</environment>
+					<region>${region}</region>
+					<workers>${workers}</workers>
+					<workerType>${workerType}</workerType>
+					<objectStoreV2>true</objectStoreV2>
+					<properties>
+						<anypoint.platform.client_id>${cloudhub.clientId}</anypoint.platform.client_id>
+						<anypoint.platform.client_secret>${cloudhub.clientSecret}</anypoint.platform.client_secret>
+						<cloudhub.username>${cloudhub.username}</cloudhub.username>
+						<cloudhub.password>${cloudhub.password}</cloudhub.password>
+						<anypoint.platform.config.analytics.agent.enabled>true</anypoint.platform.config.analytics.agent.enabled>
+						<env>${env}</env>
+					</properties>
+				</cloudHubDeployment>
+				<classifier>mule-application</classifier>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -102,11 +91,6 @@
 			<layout>default</layout>
 		</repository>
 		<repository>
-			<id>mule</id>
-			<name>Mule Repository</name>
-			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
-		</repository>
-		<repository>
 			<id>mulesoft-releases</id>
 			<name>MuleSoft Releases Repository</name>
 			<url>https://repository.mulesoft.org/releases/</url>
@@ -125,5 +109,4 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
 </project>

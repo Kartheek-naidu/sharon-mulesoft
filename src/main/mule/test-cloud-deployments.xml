@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="e09b2f7f-6f32-45d1-a27b-df3db0f21c04" file="env\test-${env}.yaml" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a5c369a4-b64f-452d-adb4-014c06d105d4" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<flow name="test-cloud-deploymentsFlow" doc:id="5d75e4eb-bb55-42bd-8882-b13a785586f1" >
+		<http:listener doc:name="Listener" doc:id="e23d13e5-f332-45ec-8070-0de0c1635038" config-ref="HTTP_Listener_config" path="/deploy"/>
+		<ee:transform doc:name="Transform Message" doc:id="3b4839f0-a2ef-4703-8f8c-b0c40fb55c68" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "This is test data"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="Logger" doc:id="652b141c-429b-4d0d-9974-31851e467c2b" message="Logger has executed:::: #[payload]" category="com.test.deploy"/>
+	</flow>
+</mule>
